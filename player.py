@@ -105,6 +105,7 @@ def search_artist():
                 'image': album.find('image', size="large").string
             }
             album_search_results.append(album_entity)
+            
         result = render_template("albumlist.html", list=album_search_results,
                                  artist=corrected_artist, current_song=current_song_title())
         return result

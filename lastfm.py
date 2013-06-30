@@ -18,30 +18,30 @@ class lastfm_controller:
         conn.close()
 
     def get_album_info_query(self, artist, album):
-        artist = ''.join(artist).encode('cp1251')
-        album = ''.join(album).encode('cp1251')
+        artist = ''.join(artist).encode('utf8')
+        album = ''.join(album).encode('utf8')
 
         artist = ul.quote_plus(artist)
         album = ul.quote_plus(album)
 
         data = {"api_key": API_KEY, 'artist': artist, 'album':
-                album, 'autocorrect': '1', 'method': 'album.getinfo'}
+                album, 'autocorrect': '1', 'method': 'album.getinfo', 'lang': 'ru'}
         return ul.unquote(ul.urlencode(data))
 
     def get_top_albums_query(self, artist):
-        artist = ''.join(artist).encode('cp1251')
+        artist = ''.join(artist).encode('utf8')
         artist = ul.quote_plus(artist)
 
         data = {"api_key": API_KEY, 'artist': artist,
-                'autocorrect': '1', 'method': 'artist.getTopAlbums'}
+                'autocorrect': '1', 'method': 'artist.getTopAlbums', 'lang': 'ru'}
         return ul.unquote(ul.urlencode(data))
 
     def get_top_tracks_query(self, artist):
-        artist = ''.join(artist).encode('cp1251')
+        artist = ''.join(artist).encode('utf8')
         artist = ul.quote_plus(artist)
 
         data = {"api_key": API_KEY, 'artist': artist,
-                'autocorrect': '1', 'method': 'artist.getTopTracks'}
+                'autocorrect': '1', 'method': 'artist.getTopTracks', 'lang': 'ru'}
         return ul.unquote(ul.urlencode(data))
 
     def getalbuminfo(self, artist, album):
@@ -51,9 +51,7 @@ class lastfm_controller:
 
     def gettopalbums(self, artist):
         query = self.get_top_albums_query(artist)
-        print query
         response = self.request(query)
-        print response
         return response
 
     def gettoptracks(self, artist):
