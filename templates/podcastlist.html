@@ -3,20 +3,20 @@
 <head>
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){		
+	$(document).ready(function(){
 	});
 	</script>
 </head>
-<body>	
+<body>
 	<ul>
 		{% for item in list %}
-			<li class="podcast_functions">				
+			<li class="podcast_functions">
 				<a class="title_link" href="#">{{item}}</span>
 				<a class="list" href="/podcast?title={{item}}&m=list">[List]</a>
 				<a class="play_latest" href="/podcast?title={{item}}&m=latest">[Play latest]</a>
-			</li>		
+			</li>
 		{% endfor %}
-	</ul>	
+	</ul>
 	<a id="view_playlist" href="/playlist">[View playlist]</a>
 </body>
 <!-- {% endblock %} -->

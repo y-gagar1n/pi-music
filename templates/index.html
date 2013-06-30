@@ -4,7 +4,7 @@
 		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$("#search_btn").click(function() { 
+			$("#search_btn").click(function() {
 				var query = $("#query_input").val();
 				if(query)
 					render_partial("/search?q="+query);
@@ -16,19 +16,19 @@
 			    }
 		    });
 
-		    $("#albums_list_btn").click(function() { 			
-				var artist = $("#album_artist_input").val();				
-				if(artist)
-					render_partial("/artist?artist="+artist);				
-			});
-
-			$("#top_tracks_btn").click(function() { 			
+		    $("#albums_list_btn").click(function() {
 				var artist = $("#album_artist_input").val();
 				if(artist)
-					render_partial("/top?artist="+artist);				
+					render_partial("/artist?artist="+artist);
 			});
 
-			$("#podcasts_list").click(function() { 			
+			$("#top_tracks_btn").click(function() {
+				var artist = $("#album_artist_input").val();
+				if(artist)
+					render_partial("/top?artist="+artist);
+			});
+
+			$("#podcasts_list").click(function() {
 				render_partial("/podcast_list");
 			});
 
@@ -47,7 +47,7 @@
 	        url: url,
 	        success:function(result) {
 	          $("#partial_body").html(result)
-	        }     
+	        }
 	      });
 	    }
 		</script>
@@ -59,7 +59,7 @@
 		<br/>
 		Artist: <input id="album_artist_input" type="text"/>
 		<input id="albums_list_btn" type="button" value="Albums list"/>
-		<input id="top_tracks_btn" type="button" value="Top tracks"/>		
+		<input id="top_tracks_btn" type="button" value="Top tracks"/>
 		<br/>
 		<a id="podcasts_list" href="#">Podcasts</a>
 		<div id="partial_body"></div>

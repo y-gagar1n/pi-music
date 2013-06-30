@@ -3,14 +3,14 @@
 <head>
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){	
+	$(document).ready(function(){
 		$("#clear_link").click(function(){
 			$.ajax({
 				type: "GET",
 				contentType: "application/json; charset=utf-8",
-				url: "/clear",				
+				url: "/clear",
 				dataType: 'jsonp',
-				success:function() {}			
+				success:function() {}
 			});
 			return false;
 		});
@@ -20,7 +20,7 @@
 			$.ajax({
 				type: "GET",
 				contentType: "application/json; charset=utf-8",
-				url: "/play",				
+				url: "/play",
 				data: { id : id },
 				dataType: 'jsonp',
 				success:function() {}
@@ -33,7 +33,7 @@
 			$.ajax({
 				type: "GET",
 				contentType: "application/json; charset=utf-8",
-				url: "/remove",				
+				url: "/remove",
 				data: { id : id },
 				dataType: 'jsonp',
 				success:function() {}
@@ -49,15 +49,15 @@
 			<li data-id="{{item["id"]}}">
 				<span class="artist">{{item["artist"]}}</span>
 				&nbsp;-&nbsp;
-				<span class="title">{{item["title"]}}</span>				
+				<span class="title">{{item["title"]}}</span>
 				&nbsp;
 				[<span class="duration">{{item["duration"]}}</span>]
 				<a class="play_link" href="#">[Play]</a>
-				<a class="remove_link" href="#">[Remove]</a>				
+				<a class="remove_link" href="#">[Remove]</a>
 				{% if item["current"] %}
 					playing...
 				{% endif %}
-			</li>		
+			</li>
 		{% endfor %}
 	<a href="#">[Clear playlist]</a>
 	<br/>

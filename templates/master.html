@@ -5,7 +5,7 @@
   <script src="/static/js/socketio/socket.io.min.js"></script>
   <script src="/static/js/player.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){      
+    $(document).ready(function(){
       $(".pause_link").click(function() {
         // if($(this).text() == "[PAUSE]")
         //   $(this).text("[RESUME]");
@@ -48,7 +48,7 @@
       $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: "/" + function_name     
+        url: "/" + function_name
       });
     }
 
@@ -56,12 +56,12 @@
 </head>
 <div class="page">
   <div id="current_playing_song">{{current_song}}</div>
-  <a class="pause_link" href="#">[PAUSE]</a>  
+  <a class="pause_link" href="#">[PAUSE]</a>
   <a class="stop_link" href="#">[STOP]</a>
   <a class="previous_link" href="#">[PREVIOUS]</a>
-  <a class="next_link" href="#">[NEXT]</a>  
-  <a class="volume_minus_link" href="#">[VOL -]</a>  
-  <a class="volume_plus_link" href="#">[VOL +]</a>  
+  <a class="next_link" href="#">[NEXT]</a>
+  <a class="volume_minus_link" href="#">[VOL -]</a>
+  <a class="volume_plus_link" href="#">[VOL +]</a>
 
   <a class="playlist_link" href="/playlist">[PLAYLIST]</a>
   <br/>

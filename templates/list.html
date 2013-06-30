@@ -20,7 +20,7 @@ $(document).ready(function(){
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
-			url: "/addplay",				
+			url: "/addplay",
 			data: { url : url, artist : artist, title : title, duration : duration }
 		});
 		return false;
@@ -34,7 +34,7 @@ $(document).ready(function(){
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
-			url: "/add",				
+			url: "/add",
 			data: { url : url, artist : artist, title : title, duration : duration }
 		});
 		return false;
@@ -46,12 +46,12 @@ $(document).ready(function(){
 		<li data-url="{{item["href"]}}">
 			<span class="artist">{{item["artist"]}}</span>
 			&nbsp;-&nbsp;
-			<span class="title">{{item["title"]}}</span>				
+			<span class="title">{{item["title"]}}</span>
 			&nbsp;
 			[<span class="duration">{{item["duration"]}}</span>]
 			<a class="play_link" href="#">[Play]</a>
 			<a class="add_link" href="#">[Add to playlist]</a>
-		</li>		
+		</li>
 	{% endfor %}
 </ul>
 <a id="clear_link" href="#">[Clear playlist]</a>

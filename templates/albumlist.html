@@ -5,7 +5,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$(".title_link").click(function(){
-			var title = $(this).text();			
+			var title = $(this).text();
 			var artist = $("#artist").val();
 			window.location.href = "/search_album?artist="+artist+"&album="+title;
 		});
@@ -22,7 +22,7 @@
 			<li>
 				<img src="{{item["image"]}}"/>
 				<a class="title_link" href="#">{{item["title"]}}</span>
-			</li>		
+			</li>
 		{% endfor %}
 	</ul>
 	<a id="clear_link" href="#">[Clear playlist]</a>
