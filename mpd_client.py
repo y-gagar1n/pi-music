@@ -8,17 +8,18 @@ class play_stream:
         self.client.connect("localhost", 6600)
         self.clear()
         self.playlist = {}
+        self._playlist_updated = False
 
     def addplay(self, stream_uri, artist, title, duration):
         songid = self.client.addid(stream_uri)
         self.playlist[songid] = {"id": songid,
                                  "uri": stream_uri, "artist": artist, "title": title, "duration": duration}
         self.client.playid(songid)
+        self._playlist_updated = True
         return songid
 
     def addplayrange(self, list):
         first = True
-        songid = 0
         for item in list:
             if(first):
                 self.addplay(item["href"], item[
@@ -27,11 +28,13 @@ class play_stream:
             else:
                 self.add(item["href"], item[
                          "artist"], item["title"], item["duration"])
+        self._playlist_updated = True
 
     def add(self, stream_uri, artist, title, duration):
         songid = self.client.addid(stream_uri)
         self.playlist[songid] = {"id": songid, "uri": stream_uri,
                                  "artist": artist, "title": title, "duration": duration}
+        self._playlist_updated = True
 
     def play(self, songid):
         self.client.playid(songid)
@@ -42,6 +45,7 @@ class play_stream:
 
     def clear(self):
         self.client.clear()
+        self._playlist_updated = True
 
     def pause(self):
         state = self.client.status()['state']
@@ -81,3 +85,9 @@ class play_stream:
     def currentsong(self):
         songid = self.client.currentsong()["id"]
         return self.playlist[songid]
+
+    def playlist_updated(self):
+        if self._playlist_updated:
+            self._playlist_updated = False
+            return True
+        return False

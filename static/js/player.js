@@ -4,10 +4,15 @@ $(function() {
         socket = io.connect('/player');
 
     socket.on('song_changed', song_changed);
+    socket.on('playlist_updated', playlist_updated);
 
     function song_changed (msg) {
         $("#current_playing_song").text(msg);
         update_playlist();
+    }
+
+    function playlist_updated(msg) {
+    	update_playlist();
     }
 
     $(function () {
@@ -23,7 +28,7 @@ function update_playlist()
     url: "/playlist",
     success: function(response)
     {
-      $("#playlist_placeholder").html(response);
+		$("#playlist_placeholder").html(response);
     }
   });
 }

@@ -9,7 +9,7 @@ import urllib as ul
 from BeautifulSoup import BeautifulStoneSoup
 import HTMLParser
 import config
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from lastfm import lastfm_controller
 from mpd_client import play_stream
 from socketio import socketio_manage
@@ -274,7 +274,8 @@ def previous_song():
 def fetch_playlist():
     try:
         playlistinfo = player.getplaylistinfo()
-        return render_template("playlist.html", list=playlistinfo, current_song=current_song_title())
+        result = render_template("playlist.html", list=playlistinfo)
+        return result
     except Exception as e:
         print e
 
@@ -366,6 +367,10 @@ class PlayerNamespace(BaseNamespace):
                 self.emit("song_changed", current_song_title())
                 last_url = current_url
             current_url = getcurrentsong_url()
+
+            if player.playlist_updated():
+                self.emit("playlist_updated")
+
             time.sleep(0.5)
 
 
@@ -376,7 +381,7 @@ def socketio(remaining):
     except:
         app.logger.error("Exception while handling socketio connection",
                          exc_info=True)
-    return "error"
+    return Response()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
