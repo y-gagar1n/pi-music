@@ -244,14 +244,12 @@ def pause_song():
 
 @app.route("/volume_minus")
 def volume_minus():
-    print "minus"
     player.addvolume(-10)
     return "success"
 
 
 @app.route("/volume_plus")
 def volume_plus():
-    print "plus"
     player.addvolume(10)
     return "success"
 
@@ -374,7 +372,7 @@ def socketio(remaining):
     except:
         app.logger.error("Exception while handling socketio connection",
                          exc_info=True)
-    return"error"
+    return "error"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
