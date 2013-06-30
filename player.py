@@ -105,7 +105,7 @@ def search_artist():
                 'image': album.find('image', size="large").string
             }
             album_search_results.append(album_entity)
-            
+
         result = render_template("albumlist.html", list=album_search_results,
                                  artist=corrected_artist, current_song=current_song_title())
         return result
@@ -157,7 +157,7 @@ def podcast():
             item = channel.find("item")
             p = parse_podcast(item)
             player.addplay(p['href'], p['artist'], p['title'], p['duration'])
-            return fetch_playlist()
+            return "success"
 
         if mode == "list":
             list = []

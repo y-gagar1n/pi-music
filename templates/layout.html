@@ -6,46 +6,38 @@
   <script src="/static/js/player.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
+      update_playlist();
+
       $(".pause_link").click(function() {
-        ajax_call("pause");
+        ajax_call("/pause");
         return false;
       });
 
       $(".stop_link").click(function() {
-        ajax_call("clear");
+        ajax_call("/clear");
         return false;
       });
 
       $(".previous_link").click(function() {
-        ajax_call("previous");
+        ajax_call("/previous");
         return false;
       });
 
       $(".next_link").click(function() {
-        ajax_call("next");
+        ajax_call("/next");
         return false;
       });
 
       $(".volume_minus_link").click(function() {
-        ajax_call("volume_minus");
+        ajax_call("/volume_minus");
         return false;
       });
 
       $(".volume_plus_link").click(function() {
-        ajax_call("volume_plus");
+        ajax_call("/volume_plus");
         return false;
       });
-
     });
-
-    function ajax_call(function_name)
-    {
-      $.ajax({
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        url: "/" + function_name
-      });
-    }
 
   </script>
 </head>
@@ -57,10 +49,15 @@
   <a class="next_link" href="#">[NEXT]</a>
   <a class="volume_minus_link" href="#">[VOL -]</a>
   <a class="volume_plus_link" href="#">[VOL +]</a>
-
-  <a class="playlist_link" href="/playlist">[PLAYLIST]</a>
+  
   <br/>
-  {% block body %}
-  {% endblock %}
+  <div>
+    <div style="float:left;width:70%">
+      {% block body %}
+      {% endblock %}
+    </div>
+    <div style="float:left;width:30%" id="playlist_placeholder">
+    </div>
+  </div>
 </div>
 </html>

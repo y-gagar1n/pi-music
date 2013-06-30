@@ -5,7 +5,7 @@
 		$(".title_link").click(function(){
 			var title = $(this).text();
 			var artist = $("#artist").val();
-			window.location.href = "/search_album?artist="+artist+"&album="+title;
+			ajax_call("/search_album?artist="+artist+"&album="+title);
 		});
 	});
 	</script>
