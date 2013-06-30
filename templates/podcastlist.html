@@ -2,6 +2,10 @@
 	<script src="/static/js/jquery-1.5.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
+		$(".list, .play_latest").click(function(){
+			var url = $(this).attr('data-url');
+			render_partial(url);
+		})
 	});
 	</script>
 </head>
@@ -9,12 +13,11 @@
 	<ul>
 		{% for item in list %}
 			<li class="podcast_functions">
-				<a class="title_link" href="#">{{item}}</span>
-				<a class="list" href="/podcast?title={{item}}&m=list">[List]</a>
-				<a class="play_latest" href="/podcast?title={{item}}&m=latest">[Play latest]</a>
+				<a class="title_link" hre="#">{{item}}</span>
+				<a class="list" data-url="/podcast?title={{item}}&m=list" href="#">[List]</a>
+				<a class="play_latest" data-url="/podcast?title={{item}}&m=latest" href="#">[Play latest]</a>
 			</li>
 		{% endfor %}
 	</ul>
 	<a id="view_playlist" href="/playlist">[View playlist]</a>
 </body>
-<!-- {% endblock %} -->

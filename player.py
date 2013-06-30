@@ -59,7 +59,6 @@ def search_album():
         soup = BeautifulStoneSoup(''.join(response))
         album_artist = soup.lfm.album.artist.string
         tracklist = soup.lfm.album.tracks
-        vk_search_results = []
         query_list = []
         for track in tracklist.findAll("track"):
             query = {'artist': album_artist, 'title': track.find(
@@ -157,7 +156,7 @@ def podcast():
             item = channel.find("item")
             p = parse_podcast(item)
             player.addplay(p['href'], p['artist'], p['title'], p['duration'])
-            return playlist()
+            return fetch_playlist()
 
         if mode == "list":
             list = []
@@ -184,7 +183,11 @@ def parse_podcast(item):
         title = title_xml.string if title_xml else item.title.string
 
         duration_xml = item.find("itunes:duration")
-        duration = duration_xml.string if duration_xml else item.duration.string
+        duration = 0
+        if(duration_xml):
+            duration = duration_xml.string
+        elif item.duration:
+            duration = item.duration.string
 
         return {'href': url, 'artist': artist, 'title': title, 'duration': duration}
     else:
