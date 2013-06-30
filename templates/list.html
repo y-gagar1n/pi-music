@@ -1,0 +1,60 @@
+<!-- {% extends "master.html" %}
+{% block body %} -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#clear_link").click(function(){
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/clear"
+		});
+		return false;
+	});
+
+	$(".play_link").click(function(){
+		var url = $(this).closest('li').attr("data-url")
+		var artist = $(this).siblings(".artist").text()
+		var title = $(this).siblings(".title").text()
+		var duration = $(this).siblings(".duration").text()
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/addplay",				
+			data: { url : url, artist : artist, title : title, duration : duration }
+		});
+		return false;
+	});
+
+	$(".add_link").click(function(){
+		var url = $(this).closest('li').attr("data-url")
+		var artist = $(this).siblings(".artist").text()
+		var title = $(this).siblings(".title").text()
+		var duration = $(this).siblings(".duration").text()
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/add",				
+			data: { url : url, artist : artist, title : title, duration : duration }
+		});
+		return false;
+	});
+});
+</script>
+<ul>
+	{% for item in list %}
+		<li data-url="{{item["href"]}}">
+			<span class="artist">{{item["artist"]}}</span>
+			&nbsp;-&nbsp;
+			<span class="title">{{item["title"]}}</span>				
+			&nbsp;
+			[<span class="duration">{{item["duration"]}}</span>]
+			<a class="play_link" href="#">[Play]</a>
+			<a class="add_link" href="#">[Add to playlist]</a>
+		</li>		
+	{% endfor %}
+</ul>
+<a id="clear_link" href="#">[Clear playlist]</a>
+<br/>
+<a id="view_playlist" href="/playlist">[View playlist]</a>
+<!-- {% endblock %} -->
