@@ -38,8 +38,6 @@ class play_stream:
 
     def add(self, stream_uri, artist, title, duration):
         songid = self.client.addid(stream_uri)
-        print stream_uri
-        print songid
         self.playlist[songid] = {"id": songid, "uri": stream_uri,
                                  "artist": artist, "title": title, "duration": duration}
         self._playlist_updated = True
