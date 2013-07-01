@@ -1,0 +1,6 @@
+beautifulsoup
+flask
+python-mpd
+gevent-socketio
+vk-api
+requests
