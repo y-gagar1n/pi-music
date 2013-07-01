@@ -17,7 +17,7 @@ $(document).ready(function(){
 	});
 
 	$(".button.play").click(function(){
-		var id = $(this).closest('p').attr("data-id")
+		var id = $(this).closest('div').attr("data-id")
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
@@ -30,7 +30,7 @@ $(document).ready(function(){
 	});
 
 	$(".button.remove").click(function(){
-		var id = $(this).closest('p').attr("data-id")
+		var id = $(this).closest('div').attr("data-id")
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
@@ -49,20 +49,20 @@ $(window).load(function(){
 </script>
 
 <div id="playlist_container">
-	<div>
+	<div id="playlist_container_inner">
 		{% for item in list %}
-			<p data-id="{{item["id"]}}">
-				<span class="artist">{{item["artist"]}}</span>
-				&nbsp;-&nbsp;
-				<span class="title">{{item["title"]}}</span>
-				&nbsp;
-				[<span class="duration">{{item["duration"]}}</span>]
+			<div class="track_container" data-id="{{item["id"]}}">
 				<a class="small button play" href="#"></a>
+				<div class="track_properties">
+					<span class="title">{{item["title"]}}</span>
+					<span class="artist">{{item["artist"]}}</span>
+					<!-- [<span class="duration">{{item["duration"]}}</span>] -->
+				</div>
 				<a class="small button remove" href="#"></a>
 				{% if item["current"] %}
 					playing...
 				{% endif %}
-			</p>
+			</div>
 		{% endfor %}
 	</div>
 </div>

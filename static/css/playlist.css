@@ -5,3 +5,37 @@
 	height: 400px;
 	border: 1px solid gray;
 }
+
+#playlist_container_inner {
+	width: 198px;
+	overflow:hidden;
+}
+
+#playlist_container_inner .artist
+{
+	font-size:76%;
+	display:block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+.track_container{
+	padding-left:5px;
+}
+
+#playlist_container_inner .title
+{
+	font-size:100%;
+	display:block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+#playlist_container_inner .track_properties
+{
+	margin: 7px;
+	display:inline-block;
+	overflow-x:hidden;
+	white-space: nowrap;
+	width: 135px;
+}
