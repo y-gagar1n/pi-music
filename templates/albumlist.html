@@ -10,9 +10,6 @@
 	</script>
 </head>
 <body>
-	<a href="/top?artist={{artist}}">Top tracks</a>
-
-
 	<input type="hidden" id="artist" value="{{artist}}"/>
 		<ul>
 		{% for item in list %}
@@ -22,7 +19,4 @@
 			</li>
 		{% endfor %}
 	</ul>
-	<a id="clear_link" href="#">[Clear playlist]</a>
-	<br/>
-	<a id="view_playlist" href="/playlist">[View playlist]</a>
 </body>
