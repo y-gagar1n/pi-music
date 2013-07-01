@@ -119,7 +119,6 @@ def top():
         soup = BeautifulStoneSoup(''.join(response))
         corrected_artist = soup.lfm.toptracks['artist']
         tracklist = soup.lfm.toptracks
-        top_track_results = []
         query_list = []
         for track in tracklist.findAll("track"):
             query = {'artist': corrected_artist, 'title': track.find(
@@ -220,8 +219,6 @@ def play_song():
 def add_play_songs_range():
     try:
         songs = json.loads(request.args.get('songs'))
-        print songs
-        print len(songs)
         player.addplayrange(songs)
         return "success"
     except Exception as e:

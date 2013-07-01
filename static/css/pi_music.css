@@ -1,0 +1,45 @@
+.button {
+    cursor:pointer;
+    display:inline-block;
+    height:32px;
+    width:32px;
+    background-repeat:no-repeat;
+    background-size:100%;
+}
+
+.button.small {
+	height:16px;
+    width:16px;
+}
+
+.button.play {
+	background-image:url('../img/play.png');
+}
+
+.button.stop {
+	background-image:url('../img/clear.png');
+}
+
+.button.next {
+	background-image:url('../img/next.png');
+}
+
+.button.pause {
+	background-image:url('../img/pause.png');
+}
+
+.button.previous {
+	background-image:url('../img/previous.png');
+}
+
+.button.remove {
+	background-image:url('../img/trash.png');
+}
+
+.button.volumeup {
+	background-image:url('../img/volumeup.png');
+}
+
+.button.volumedown {
+	background-image:url('../img/volumedown.png');
+}

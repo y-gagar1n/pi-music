@@ -16,7 +16,7 @@ $(document).ready(function(){
 		return false;
 	});
 
-	$(".play_link").click(function(){
+	$(".button.play").click(function(){
 		var id = $(this).closest('p').attr("data-id")
 		$.ajax({
 			type: "GET",
@@ -29,7 +29,7 @@ $(document).ready(function(){
 		return false;
 	});
 
-	$(".remove_link").click(function(){
+	$(".button.remove").click(function(){
 		var id = $(this).closest('p').attr("data-id")
 		$.ajax({
 			type: "GET",
@@ -57,8 +57,8 @@ $(window).load(function(){
 				<span class="title">{{item["title"]}}</span>
 				&nbsp;
 				[<span class="duration">{{item["duration"]}}</span>]
-				<a class="play_link" href="#">[Play]</a>
-				<a class="remove_link" href="#">[Remove]</a>
+				<a class="small button play" href="#"></a>
+				<a class="small button remove" href="#"></a>
 				{% if item["current"] %}
 					playing...
 				{% endif %}
