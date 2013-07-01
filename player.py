@@ -1,10 +1,8 @@
 import math
-import pprint
-import random
 import string
-import threading
 import time
 import urllib as ul
+import json
 
 from BeautifulSoup import BeautifulStoneSoup
 import HTMLParser
@@ -82,10 +80,10 @@ def find_play_range_worker(query_list):
                                "artist"], query["title"], query["duration"])
         if(item):
             if first:
-                player.addplay(item["href"], item[
+                player.addplay(item["url"], item[
                                "artist"], item["title"], item["duration"])
             else:
-                player.add(item["href"], item[
+                player.add(item["url"], item[
                            "artist"], item["title"], item["duration"])
         first = False
 
@@ -156,7 +154,7 @@ def podcast():
         if mode == "latest":
             item = channel.find("item")
             p = parse_podcast(item)
-            player.addplay(p['href'], p['artist'], p['title'], p['duration'])
+            player.addplay(p['url'], p['artist'], p['title'], p['duration'])
             return "success"
 
         if mode == "list":
@@ -190,7 +188,7 @@ def parse_podcast(item):
         elif item.duration:
             duration = item.duration.string
 
-        return {'href': url, 'artist': artist, 'title': title, 'duration': duration}
+        return {'url': url, 'artist': artist, 'title': title, 'duration': duration}
     else:
         return None
 
@@ -218,6 +216,18 @@ def play_song():
         print e
 
 
+@app.route("/addplayrange")
+def add_play_songs_range():
+    try:
+        songs = json.loads(request.args.get('songs'))
+        print songs
+        print len(songs)
+        player.addplayrange(songs)
+        return "success"
+    except Exception as e:
+        print e
+
+
 @app.route("/clear")
 def clear_songs():
     try:
@@ -235,6 +245,18 @@ def add_song():
         title = request.args.get('title')
         duration = request.args.get('duration')
         player.add(url, artist, title, duration)
+        return "success"
+    except Exception as e:
+        print e
+
+
+@app.route("/addrange")
+def add_songs_range():
+    try:
+        songs = json.loads(request.args.get('songs'))
+        print songs
+        print len(songs)
+        player.addrange(songs)
         return "success"
     except Exception as e:
         print e
@@ -338,7 +360,7 @@ def parseList(list):
 
 def parseOne(x):
     return {
-        "href": x["url"],
+        "url": x["url"],
         "artist": x["artist"],
         "title": x["title"],
         "duration": parseDuration(x["duration"])

@@ -9,38 +9,71 @@ $(document).ready(function(){
 		return false;
 	});
 
+	$(".add_all_link").click(function(){
+		var $song_links = $("#search_results_container .play_link");
+		var songs = $.map($song_links,
+			function(e) {
+				return create_json_song_object($(e));
+			});
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/addrange",
+			data: { 'songs': JSON.stringify(songs) }
+		});
+		return false;
+	});
+
+	$(".play_all_link").click(function(){
+		var $song_links = $("#search_results_container .play_link");
+		var songs = $.map($song_links,
+			function(e) {
+				return create_json_song_object($(e));
+			});
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/addplayrange",
+			data: { 'songs': JSON.stringify(songs) }
+		});
+		return false;
+	});
+
 	$(".play_link").click(function(){
-		var url = $(this).closest('li').attr("data-url")
-		var artist = $(this).siblings(".artist").text()
-		var title = $(this).siblings(".title").text()
-		var duration = $(this).siblings(".duration").text()
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
 			url: "/addplay",
-			data: { url : url, artist : artist, title : title, duration : duration }
+			data: create_json_song_object($(this))
 		});
 		return false;
 	});
 
 	$(".add_link").click(function(){
-		var url = $(this).closest('li').attr("data-url")
-		var artist = $(this).siblings(".artist").text()
-		var title = $(this).siblings(".title").text()
-		var duration = $(this).siblings(".duration").text()
 		$.ajax({
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
 			url: "/add",
-			data: { url : url, artist : artist, title : title, duration : duration }
+			data: create_json_song_object($(this))
 		});
 		return false;
 	});
 });
+
+function create_json_song_object($link)
+{
+	var url = $link.closest('li').attr("data-url");
+	var artist = $link.siblings(".artist").text();
+	var title = $link.siblings(".title").text();
+	var duration = $link.siblings(".duration").text();
+
+	return {'url': url, 'artist': artist, 'title': title, 'duration': duration};
+}
 </script>
-<ul>
+<a class="play_all_link" href="#">[Play all]</a><a class="add_all_link" href="#">[Add all]</a>
+<ul id="search_results_container">
 	{% for item in list %}
-		<li data-url="{{item["href"]}}">
+		<li data-url="{{item["url"]}}">
 			<span class="artist">{{item["artist"]}}</span>
 			&nbsp;-&nbsp;
 			<span class="title">{{item["title"]}}</span>

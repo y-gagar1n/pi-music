@@ -22,16 +22,24 @@ class play_stream:
         first = True
         for item in list:
             if(first):
-                self.addplay(item["href"], item[
+                self.addplay(item["url"], item[
                              "artist"], item["title"], item["duration"])
                 first = False
             else:
-                self.add(item["href"], item[
+                self.add(item["url"], item[
                          "artist"], item["title"], item["duration"])
+        self._playlist_updated = True
+
+    def addrange(self, list):
+        for item in list:
+            self.add(item["url"], item[
+                     "artist"], item["title"], item["duration"])
         self._playlist_updated = True
 
     def add(self, stream_uri, artist, title, duration):
         songid = self.client.addid(stream_uri)
+        print stream_uri
+        print songid
         self.playlist[songid] = {"id": songid, "uri": stream_uri,
                                  "artist": artist, "title": title, "duration": duration}
         self._playlist_updated = True
@@ -74,11 +82,14 @@ class play_stream:
     def getplaylistinfo(self):
         playlistinfo = self.client.playlistinfo()
         currentsonginfo = self.client.currentsong()
+        print currentsonginfo
+
         result = []
+        print self.playlist
         for item in playlistinfo:
             item_to_add = self.playlist[item["id"]]
-            item_to_add["current"] = (item_to_add[
-                                      "id"] == currentsonginfo["id"])
+            if(currentsonginfo):
+                item_to_add["current"] = (item_to_add["id"] == currentsonginfo["id"])
             result.append(item_to_add)
         return result
 
