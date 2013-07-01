@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
 	<head>
-		<script src="/static/js/jquery-1.5.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
 			$("#search_btn").click(function() {
@@ -39,17 +38,6 @@
 			});
 		});
 
-		function render_partial(url)
-	    {
-	      $.ajax({
-	        type: "GET",
-	        contentType: "application/json; charset=utf-8",
-	        url: url,
-	        success:function(result) {
-	          $("#partial_body").html(result)
-	        }
-	      });
-	    }
 		</script>
 	</head>
 	<body>
