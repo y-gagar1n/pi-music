@@ -3,6 +3,51 @@
 <link href="/static/css/perfect-scrollbar-0.4.1.min.css" rel="stylesheet">
 <link href="/static/css/playlist.css" rel="stylesheet">
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#clear_link").click(function(){
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/clear",
+			dataType: 'jsonp',
+			success:function() {}
+		});
+		return false;
+	});
+
+	$(".play_link").click(function(){
+		var id = $(this).closest('p').attr("data-id")
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/play",
+			data: { id : id },
+			dataType: 'jsonp',
+			success:function() {}
+		});
+		return false;
+	});
+
+	$(".remove_link").click(function(){
+		var id = $(this).closest('p').attr("data-id")
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "/remove",
+			data: { id : id },
+			dataType: 'jsonp',
+			success:function() {}
+		});
+		return false;
+	});
+	$("#playlist_container").perfectScrollbar();
+});
+$(window).load(function(){
+	$("#playlist_container").perfectScrollbar('update');
+});
+</script>
+
 <div id="playlist_container">
 	<div>
 		{% for item in list %}
@@ -21,50 +66,3 @@
 		{% endfor %}
 	</div>
 </div>
-<a href="#">[Clear playlist]</a>
-<br/>
-<a id="search" href="/">[Back to search]</a>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#clear_link").click(function(){
-		$.ajax({
-			type: "GET",
-			contentType: "application/json; charset=utf-8",
-			url: "/clear",
-			dataType: 'jsonp',
-			success:function() {}
-		});
-		return false;
-	});
-
-	$(".play_link").click(function(){
-		var id = $(this).closest('li').attr("data-id")
-		$.ajax({
-			type: "GET",
-			contentType: "application/json; charset=utf-8",
-			url: "/play",
-			data: { id : id },
-			dataType: 'jsonp',
-			success:function() {}
-		});
-		return false;
-	});
-
-	$(".remove_link").click(function(){
-		var id = $(this).closest('li').attr("data-id")
-		$.ajax({
-			type: "GET",
-			contentType: "application/json; charset=utf-8",
-			url: "/remove",
-			data: { id : id },
-			dataType: 'jsonp',
-			success:function() {}
-		});
-		return false;
-	});
-	$("#playlist_container").perfectScrollbar();
-});
-$(window).load(function(){
-	$("#playlist_container").perfectScrollbar('update');
-});
-</script>
