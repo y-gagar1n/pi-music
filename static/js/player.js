@@ -7,8 +7,14 @@ $(function() {
     socket.on('playlist_updated', playlist_updated);
 
     function song_changed (msg) {
-        $("#current_playing_song").text(msg);
+        $("#current_playing_song").text(msg.title);        
         update_playlist();
+
+        $("#jplayer").jPlayer("setMedia", {
+          mp3:msg.url
+        });
+
+        $("#jplayer").jPlayer("play",0);
     }
 
     function playlist_updated(msg) {

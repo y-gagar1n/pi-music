@@ -383,7 +383,7 @@ class PlayerNamespace(BaseNamespace):
         current_url = last_url
         while True:
             if not current_url == "" and not current_url == last_url:
-                self.emit("song_changed", current_song_title())
+                self.emit("song_changed", {"title" : current_song_title(), "url" : current_url })
                 last_url = current_url
             current_url = getcurrentsong_url()
 
